@@ -5,8 +5,6 @@ from game.shared.point import Point
 
 class cycle(Actor):
     """
-    A long limbless reptile.
-    
     The responsibility of cycle is to move itself.
 
     Attributes:
@@ -25,9 +23,16 @@ class cycle(Actor):
         self._prepare_body()
 
     def get_segments(self):
+        """
+        It returns the segments of the line.
+        :return: The segments of the line.
+        """
         return self._segments
 
     def move_next(self):
+        """
+        The function moves all the segments of the snake and updates the velocities of the segments
+        """
         # move all segments
         for segment in self._segments:
             segment.move_next()
@@ -39,6 +44,10 @@ class cycle(Actor):
             trailing.set_velocity(velocity)
 
     def get_head(self):
+        """
+        It returns the first element of the list.
+        :return: The head of the snake.
+        """
         return self._segments[0]
 
     def grow_tail(self, number_of_segments):
@@ -70,12 +79,18 @@ class cycle(Actor):
                     self._segments.append(segment)
 
     def turn_head(self, velocity):
+        """
+        The function turn_head() takes in a velocity and sets the velocity of the head segment to that
+        velocity
+        
+        :param velocity: The velocity of the head
+        """
         self._segments[0].set_velocity(velocity)
     
     def _prepare_body(self):
         """
-        > The function creates a snake with a head and a body of length `CYCLE_LENGTH` and places it in
-        the middle of the screen
+        > The function creates a snake with a length of 8, with the head in the middle of the screen,
+        and the body segments following behind
         """
 
         x = int(constants.MAX_X / 2)
